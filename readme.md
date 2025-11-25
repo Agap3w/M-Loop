@@ -1,0 +1,3 @@
+**Echoes — RPG Time-Loop Investigativo**
+
+Il mondo è intrappolato in un loop temporale di pochi giorni, e solo il protagonista mantiene la memoria tra un ciclo e l’altro. Ogni loop è un tentativo di capire cosa sta per succedere: studiare le routine dei personaggi, anticipare eventi, raccogliere indizi, sbloccare nuove interazioni e manipolare la sequenza temporale per cambiare il destino del villaggio. Con mappe piccole e un cast di pochi NPC ma profondi, il gioco unisce esplorazione, puzzle narrativi e scelte strategiche: quali informazioni ottenere in questo ciclo? Chi aiutare? Cosa sacrificare? Ogni reset è un passo avanti verso la verità, e il giocatore costruisce progressivamente il percorso necessario per spezzare il loop e risolvere il mistero.
