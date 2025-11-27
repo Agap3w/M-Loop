@@ -47,7 +47,7 @@ class Player(pygame.sprite.Sprite ):
                 if sprite.hitbox.colliderect(self.hitbox):
                     if self.direction.x > 0: # moving right
                         self.hitbox.right = sprite.hitbox.left
-                    if self.direction.x < 0: # moving left
+                    elif self.direction.x < 0: # moving left
                         self.hitbox.left = sprite.hitbox.right
                     
         if direction == 'vertical':
@@ -55,7 +55,7 @@ class Player(pygame.sprite.Sprite ):
                 if sprite.hitbox.colliderect(self.hitbox):
                     if self.direction.y > 0: # moving down
                         self.hitbox.bottom= sprite.hitbox.top
-                    if self.direction.y < 0: # moving up
+                    elif self.direction.y < 0: # moving up
                         self.hitbox.top = sprite.hitbox.bottom
 
     def update(self):
