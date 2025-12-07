@@ -20,12 +20,12 @@ class Level:
     def create_map(self):
         layouts = {
             'boundary': import_csv_layout('../map/collision.csv'),
-            'grass': import_csv_layout('../map/grass.csv'),
+            'walkable_objects': import_csv_layout('../map/walkable_objects.csv'),
             'objects': import_csv_layout('../map/objects.csv')
         }
 
         graphics = {
-            'grass' : import_folder('../graphics/grass'),
+            'walkable_objects' : import_folder('../graphics/walkable_objects'),
             'objects' : import_folder('../graphics/objects')
         }
         for style, layout in layouts.items():
@@ -36,9 +36,9 @@ class Level:
                         y = row_index * TILESIZE
                         if style == 'boundary':
                             Tile((x,y), [self.obstacle_sprites], 'invisible')
-                        if style == 'grass':
-                            surf = graphics['grass'][int(col)]
-                            Tile((x,y), [self.visible_sprites], 'grass', surf)
+                        if style == 'walkable_objects':
+                            surf = graphics['walkable_objects'][int(col)]
+                            Tile((x,y), [self.visible_sprites], 'walkable_objects', surf)
                         if style == 'objects':
                             surf = graphics['objects'][int(col)]
                             Tile((x,y), [self.visible_sprites, self.obstacle_sprites], 'objects', surf)
