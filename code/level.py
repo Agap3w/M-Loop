@@ -8,7 +8,7 @@ from support import *
 from dialogue import DialogueManager
 
 class Level:
-    def __init__(self, map_name='npc_world'):
+    def __init__(self, time_manager, map_name='npc_world'):
         """map_name: nome della mappa da caricare (es: 'world', 'house1', 'church')"""
         
         # get the display surface
@@ -16,6 +16,9 @@ class Level:
 
         # Nome mappa corrente
         self.map_name = map_name
+
+        # Time manager
+        self.time_manager = time_manager
 
         # sprite group setup
         self.visible_sprites = YSortCameraGroup()
@@ -27,6 +30,7 @@ class Level:
 
         # sprite setup
         self.create_map()
+        self.player_spawn = (self.player.rect.x, self.player.rect.y)
 
     def create_map(self):
         """Carica la mappa usando approccio IBRIDO: CSV per tiles + JSON per NPC"""
@@ -118,8 +122,8 @@ class Level:
             self.dialogue_manager.start_dialogue(
                 self.player.nearby_npc,
                 initiated_by='player',
-                loop_count=0,  # TODO: Collegare al sistema di loop
-                time=9.0,      # TODO: Collegare al sistema temporale
+                loop_count=self.time_manager.loop_count,
+                time=self.time_manager.current_time,
                 has_item_newspaper=False  # TODO: Collegare all'inventario
             )
             
@@ -127,6 +131,16 @@ class Level:
             self.player.can_move = False
 
     def run(self):
+
+        # Check se il loop è appena resetato
+        if self.time_manager.just_reset:
+            # Riporta il player allo spawn
+            self.player.rect.x, self.player.rect.y = self.player_spawn
+            self.player.hitbox.center = self.player.rect.center
+            
+            # Resetta il flag
+            self.time_manager.just_reset = False
+            
         # Controlla NPC vicini per interazione
         self.player.check_nearby_npcs(self.npc_sprites)
         
@@ -136,10 +150,12 @@ class Level:
         
         # Aggiorna e disegna il dialogo se attivo
         if self.dialogue_manager.active:
+            self.time_manager.pause()
             self.dialogue_manager.update()
             self.dialogue_manager.draw(self.display_surface)
         else:
             # Sblocca il movimento quando il dialogo finisce
+            self.time_manager.resume()
             self.player.can_move = True
 
 
