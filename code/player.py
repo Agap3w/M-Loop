@@ -5,7 +5,7 @@ from support import import_folder
 class Player(pygame.sprite.Sprite ):
     def __init__(self, pos, groups, obstacle_sprites):
         super().__init__(groups)
-        self.image = pygame.image.load('../graphics/player.png').convert_alpha()
+        self.image = pygame.image.load('../graphics/player/down/0.png').convert_alpha()
         self.rect = self.image.get_rect(topleft=pos)
         self.hitbox = self.rect.inflate(0, -4)
 
@@ -17,7 +17,7 @@ class Player(pygame.sprite.Sprite ):
 
         # movement
         self.direction = pygame.math.Vector2()
-        self.speed = 7 # per ora la metto qui ma poi la sostituirò con un dict
+        self.speed = 5
 
         self.obstacle_sprites = obstacle_sprites
 
@@ -106,7 +106,6 @@ class Player(pygame.sprite.Sprite ):
         # set the image
         self.image = animation[int(self.frame_index)]
         self.rect = self.image.get_rect(center = self.hitbox.center)
-
 
     def update(self):
         self.input()
