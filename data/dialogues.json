@@ -1,0 +1,132 @@
+{
+  "merchant_intro": {
+    "type": "multiple_choice",
+    "npc_name": "Mercante",
+    "text": "Benvenuto al mio negozio! Posso aiutarti con qualcosa?",
+    "choices": [
+      {
+        "text": "Voglio comprare qualcosa",
+        "action": "shop"
+      },
+      {
+        "text": "Hai visto qualcosa di strano oggi?",
+        "action": "investigate"
+      },
+      {
+        "text": "Solo salutare, grazie",
+        "action": "leave"
+      }
+    ],
+    "conditions": {
+      "loop_count > 3": {
+        "text": "Di nuovo qui? Ormai sei un cliente abituale! Vuoi sapere qualcosa?",
+        "type": "basic"
+      },
+      "loop_count > 7": {
+        "text": "Ti vedo sempre passare... stai cercando qualcosa di particolare?",
+        "type": "basic"
+      }
+    }
+  },
+  
+  "hermit_intro": {
+    "type": "basic",
+    "npc_name": "Eremita",
+    "text": "Salve, straniero. Cosa ti porta da queste parti remote?",
+    "conditions": {
+      "loop_count > 0": "Sei tornato... interessante. C'è qualcosa di strano nell'aria oggi.",
+      "loop_count > 3": "Ancora tu? Stai iniziando a capire, vero? Il tempo si ripete...",
+      "loop_count > 5": "Il loop... lo vedi anche tu ora. Il segreto è nascosto da qualche parte nel villaggio.",
+      "loop_count > 10": "Hai indagato abbastanza? Il tempo sta per finire di nuovo. Devi scoprire la verità!",
+      "time >= 18:00": "Il giorno sta per finire... e poi tutto ricomincia. Tu lo sai, vero?"
+    }
+  },
+  
+  "villager_1_intro": {
+    "type": "basic",
+    "npc_name": "Paesano",
+    "text": "Che bella giornata oggi! Il sole splende e tutto va per il meglio.",
+    "conditions": {
+      "time >= 12:00": "Buon pomeriggio! Stavo giusto andando a pranzo. Vuoi unirti?",
+      "time >= 18:00": "La giornata sta per finire... come vola il tempo! A domani!",
+      "loop_count > 5": "Ti vedo spesso da queste parti. Sei nuovo in città o abiti qui vicino?",
+      "loop_count > 10": "Ma quante volte ci siamo già incontrati oggi? Devo essere distratto..."
+    }
+  },
+  
+  "villager_2_intro": {
+    "type": "multiple_choice",
+    "npc_name": "Paesana",
+    "text": "Oh, ciao! Hai sentito le ultime novità del villaggio?",
+    "choices": [
+      {
+        "text": "Quali novità?",
+        "action": "ask_news"
+      },
+      {
+        "text": "No, cosa è successo?",
+        "action": "ask_what"
+      },
+      {
+        "text": "Non ho tempo, scusa",
+        "action": "leave"
+      }
+    ],
+    "conditions": {
+      "loop_count > 0": "Stamattina ho sentito un rumore fortissimo! Veniva dalla piazza, credo.",
+      "loop_count > 5": "Continuo a sentire quel rumore ogni mattina... ma nessun altro sembra ricordarlo. È strano, no?",
+      "loop_count > 8": "Tu... tu lo ricordi anche tu, vero? Il rumore! Non sono pazza!"
+    }
+  },
+  
+  "guard_intro": {
+    "type": "basic",
+    "npc_name": "Guardia",
+    "text": "Tutto tranquillo oggi. Nessun problema in vista, cittadino.",
+    "conditions": {
+      "loop_count > 3": "Ti vedo spesso girare per il villaggio. Stai cercando qualcosa in particolare?",
+      "loop_count > 7": "Sei sicuro che vada tutto bene? Sembri preoccupato... o confuso.",
+      "time >= 19:00": "È quasi ora di finire il turno. Non vedo l'ora di tornare a casa e riposare.",
+      "time >= 20:00": "Ancora qui a quest'ora? Dovresti tornare a casa, tra poco sarà buio."
+    }
+  },
+  
+  "fisherman_intro": {
+    "type": "basic",
+    "npc_name": "Pescatore",
+    "text": "Bella giornata per pescare, non credi? L'acqua è calma e limpida.",
+    "conditions": {
+      "loop_count > 0": "Strano... i pesci non abboccano. Di solito a quest'ora sono molto attivi.",
+      "loop_count > 3": "Di nuovo qui? I pesci continuano a non abboccare. Qualcosa non va nell'acqua.",
+      "loop_count > 5": "È da stamattina che provo, ma niente. Mai successo in tutta la mia vita!",
+      "time >= 18:00": "Ormai è troppo tardi per pescare. Meglio tornare a casa a mani vuote... di nuovo.",
+      "time >= 20:00": "Cosa ci fai ancora qui a quest'ora? È pericoloso stare vicino all'acqua di notte."
+    }
+  },
+  
+  "test_basic": {
+    "type": "basic",
+    "npc_name": "Test NPC",
+    "text": "Questo è un dialogo di test per verificare il sistema."
+  },
+  
+  "test_choice": {
+    "type": "multiple_choice",
+    "npc_name": "Test NPC",
+    "text": "Scegli un'opzione di test:",
+    "choices": [
+      {
+        "text": "Opzione 1",
+        "action": "opt1"
+      },
+      {
+        "text": "Opzione 2",
+        "action": "opt2"
+      },
+      {
+        "text": "Opzione 3",
+        "action": "opt3"
+      }
+    ]
+  }
+}

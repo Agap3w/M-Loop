@@ -5,6 +5,7 @@ from tile import Tile
 from player import Player
 from npc import NPC
 from support import *
+from dialogue import DialogueManager
 
 class Level:
     def __init__(self, map_name='npc_world'):
@@ -19,6 +20,10 @@ class Level:
         # sprite group setup
         self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pygame.sprite.Group()
+        self.npc_sprites = pygame.sprite.Group()
+
+        # Dialogue system
+        self.dialogue_manager = DialogueManager()
 
         # sprite setup
         self.create_map()
@@ -96,8 +101,8 @@ class Level:
                                     npc_data['speed'] = int(prop_value)
                         
                         # Crea NPC
-                        NPC(pos, [self.visible_sprites, self.obstacle_sprites], npc_data)
-                    
+                        NPC(pos, [self.visible_sprites, self.obstacle_sprites, self.npc_sprites], npc_data)
+                                          
                     break  # Layer NPC trovato, esci dal loop
         
         except FileNotFoundError:
@@ -105,10 +110,37 @@ class Level:
         except json.JSONDecodeError:
             print(f"Errore: {self.map_name}.json non è un JSON valido")
 
+    def handle_interaction(self):
+        """Gestisce l'interazione del player con gli NPC"""
+        if self.player.nearby_npc and not self.dialogue_manager.active:
+            # Avvia il dialogo
+            # In futuro qui passeremo anche loop_count, time, ecc.
+            self.dialogue_manager.start_dialogue(
+                self.player.nearby_npc,
+                initiated_by='player',
+                loop_count=0,  # TODO: Collegare al sistema di loop
+                time=9.0,      # TODO: Collegare al sistema temporale
+                has_item_newspaper=False  # TODO: Collegare all'inventario
+            )
+            
+            # Blocca il movimento del player durante il dialogo
+            self.player.can_move = False
+
     def run(self):
+        # Controlla NPC vicini per interazione
+        self.player.check_nearby_npcs(self.npc_sprites)
+        
         # update and draw the game
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
+        
+        # Aggiorna e disegna il dialogo se attivo
+        if self.dialogue_manager.active:
+            self.dialogue_manager.update()
+            self.dialogue_manager.draw(self.display_surface)
+        else:
+            # Sblocca il movimento quando il dialogo finisce
+            self.player.can_move = True
 
 
 class YSortCameraGroup(pygame.sprite.Group):
@@ -138,3 +170,7 @@ class YSortCameraGroup(pygame.sprite.Group):
         for sprite in sorted(self.sprites(), key=lambda sprite: sprite.rect.centery):
             offset_pos = sprite.rect.topleft - self.offset
             self.display_surface.blit(sprite.image, offset_pos)
+
+            # Disegna indicatore di interazione per NPC
+            if hasattr(sprite, 'draw_interaction_indicator'):
+                sprite.draw_interaction_indicator(self.display_surface, self.offset)

@@ -32,12 +32,33 @@ class NPC(pygame.sprite.Sprite):
         self.waypoints = npc_data.get('waypoints', [])
         self.current_waypoint = 0
         
-        # Dialoghi (per future fasi)
+        # Dialoghi
         self.dialogue_id = npc_data.get('dialogue_id', None)
-        self.can_interact = False
+        self.can_interact = False # Viene impostato dal player quando è nel raggio
         
         # Schedule (orari - per future fasi)
         self.schedule = npc_data.get('schedule', None)
+
+        # Indicator grafico
+        self.indicator_font = pygame.font.Font(None, 24)
+        
+    def draw_interaction_indicator(self, surface, offset):
+        """Disegna l'indicatore 'E' sopra l'NPC quando il player può interagire"""
+        if self.can_interact:
+            # Posizione dell'indicatore (sopra la testa dell'NPC)
+            indicator_pos = (
+                self.rect.centerx - offset.x,
+                self.rect.top - offset.y - 20
+            )
+            
+            # Disegna un piccolo cerchio di sfondo
+            pygame.draw.circle(surface, (50, 50, 50), indicator_pos, 12)
+            pygame.draw.circle(surface, (255, 255, 255), indicator_pos, 12, 2)
+            
+            # Disegna la lettera 'E'
+            text = self.indicator_font.render('E', True, (255, 255, 100))
+            text_rect = text.get_rect(center=indicator_pos)
+            surface.blit(text, text_rect)
         
     def move(self):
         """Gestisce il movimento dell'NPC (da implementare in Fase 6)"""

@@ -216,30 +216,18 @@
                  "id":73,
                  "name":"merchant",
                  "point":true,
-                 "properties":[
-                        {
-                         "name":"dialogue_id",
-                         "type":"string",
-                         "value":"merchant_intro"
-                        }],
                  "rotation":0,
                  "type":"merchant",
                  "visible":true,
                  "width":0,
-                 "x":295.424,
-                 "y":224.545
+                 "x":295.423909090909,
+                 "y":224.545454545455
                 }, 
                 {
                  "height":0,
                  "id":74,
                  "name":"hermit",
                  "point":true,
-                 "properties":[
-                        {
-                         "name":"dialogue_id",
-                         "type":"string",
-                         "value":"hermit_intro"
-                        }],
                  "rotation":0,
                  "type":"hermit",
                  "visible":true,
@@ -252,53 +240,35 @@
                  "id":75,
                  "name":"villager_1",
                  "point":true,
-                 "properties":[
-                        {
-                         "name":"dialogue_id",
-                         "type":"string",
-                         "value":"villager_1_intro"
-                        }],
                  "rotation":0,
                  "type":"villager_1",
                  "visible":true,
                  "width":0,
-                 "x":539.054,
-                 "y":266.223
+                 "x":539.054363636364,
+                 "y":266.222727272727
                 }, 
                 {
                  "height":0,
                  "id":76,
                  "name":"villager_2",
                  "point":true,
-                 "properties":[
-                        {
-                         "name":"dialogue_id",
-                         "type":"string",
-                         "value":"villager_2_intro"
-                        }],
                  "rotation":0,
                  "type":"villager_2",
                  "visible":true,
                  "width":0,
-                 "x":565.058,
-                 "y":266.416
+                 "x":565.057636363636,
+                 "y":266.416454545454
                 }, 
                 {
                  "height":0,
                  "id":79,
                  "name":"guard",
                  "point":true,
-                 "properties":[
-                        {
-                         "name":"dialogue_id",
-                         "type":"string",
-                         "value":"guard_intro"
-                        }],
                  "rotation":0,
                  "type":"guard",
                  "visible":true,
                  "width":0,
-                 "x":567.307,
+                 "x":567.307272727273,
                  "y":427.548
                 }, 
                 {
@@ -306,18 +276,12 @@
                  "id":81,
                  "name":"fisherman",
                  "point":true,
-                 "properties":[
-                        {
-                         "name":"dialogue_id",
-                         "type":"string",
-                         "value":"fisherman_intro"
-                        }],
                  "rotation":0,
                  "type":"fisherman",
                  "visible":true,
                  "width":0,
-                 "x":295.818,
-                 "y":52.0304
+                 "x":295.818181818182,
+                 "y":52.0303818181818
                 }],
          "opacity":1,
          "type":"objectgroup",

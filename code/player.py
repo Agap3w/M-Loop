@@ -18,8 +18,13 @@ class Player(pygame.sprite.Sprite ):
         # movement
         self.direction = pygame.math.Vector2()
         self.speed = 5
+        self.can_move = True  # Flag per bloccare movimento durante dialoghi
 
         self.obstacle_sprites = obstacle_sprites
+
+        # Interaction system
+        self.interaction_radius = 50  # Raggio in pixel per interagire
+        self.nearby_npc = None  # NPC più vicino con cui può interagire
 
     def import_player_assets(self):
         player_path = '../graphics/player'
@@ -41,6 +46,12 @@ class Player(pygame.sprite.Sprite ):
     def input(self):
         keys = pygame.key.get_pressed()
 
+        # Se non può muoversi (es: durante dialogo), non accettare input movimento
+        if not self.can_move:
+            self.direction.x = 0
+            self.direction.y = 0
+            return
+
         #movement input
         if keys[pygame.K_UP]:
             self.direction.y = -1
@@ -59,6 +70,28 @@ class Player(pygame.sprite.Sprite ):
             self.status = 'right'
         else:
             self.direction.x = 0
+
+    def check_nearby_npcs(self, npc_sprites):
+        """
+        Controlla se ci sono NPC nel raggio di interazione.
+        Trova l'NPC più vicino.
+        """
+        self.nearby_npc = None
+        min_distance = self.interaction_radius
+        
+        for npc in npc_sprites:
+            distance = pygame.math.Vector2(
+                npc.rect.centerx - self.rect.centerx,
+                npc.rect.centery - self.rect.centery
+            ).length()
+            
+            if distance < min_distance:
+                min_distance = distance
+                self.nearby_npc = npc
+        
+        # Imposta flag can_interact sull'NPC
+        for npc in npc_sprites:
+            npc.can_interact = (npc == self.nearby_npc)
 
     def get_status(self):
 
